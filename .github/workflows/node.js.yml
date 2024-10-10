@@ -28,8 +28,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
   
-    - name: Connect to Redis
-      run: redis-server
+    - name: set rediv env
       env:
         REDIS_HOST: 127.0.0.1
         REDIS_PORT: 6379
