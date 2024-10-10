@@ -28,10 +28,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
   
-    - name: set rediv env
-      env:
-        REDIS_HOST: 127.0.0.1
-        REDIS_PORT: 6379
 
 #nodejs  API job
   build_nodejs:
@@ -49,4 +45,7 @@ jobs:
         
     - run: npm install
     - run: npm start
+    env:
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6379
 
