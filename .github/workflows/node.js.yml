@@ -6,9 +6,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # configure container for redis
-  container:
-    image: node:20-bookworm-slim
+  # nodejs API job
+  build_nodejs_job:
+    # configure container for redis first
+    container:
+      image: node:20-bookworm-slim
     services:
       redis:
         image: redis
@@ -20,8 +22,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-  # nodejs API job
-  build_nodejs_job:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,7 +36,7 @@ jobs:
           cache-dependency-path: package-lock.json
           
       - run: npm install
-      - run: npm start
+      - run: npm test
     env:
       REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
