@@ -8,20 +8,6 @@ on:
 jobs:
   # nodejs API job
   build_nodejs_job:
-    # configure container for redis first
-    container:
-      image: node:20-bookworm-slim
-    services:
-      redis:
-        image: redis
-        ports:
-          - "6379:6379"
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -40,3 +26,16 @@ jobs:
     env:
       REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
+    # configure container for redis first
+    container:
+      image: node:20-bookworm-slim
+    services:
+      redis:
+        image: redis
+        ports:
+          - "6379:6379"
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
